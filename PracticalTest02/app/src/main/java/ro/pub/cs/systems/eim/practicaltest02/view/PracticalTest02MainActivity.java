@@ -22,12 +22,9 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
     private Button connectButton = null;
 
     // Client widgets
-    private EditText clientAddressEditText = null;
-    private EditText clientPortEditText = null;
-    private EditText cityEditText = null;
-    private Spinner informationTypeSpinner = null;
-    private Button getWeatherForecastButton = null;
-    private TextView weatherForecastTextView = null;
+    private EditText stockEditText = null;
+    private Button getButton = null;
+    private TextView infoTextView = null;
 
     private ServerThread serverThread = null;
     private ClientThread clientThread = null;
@@ -57,29 +54,28 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            String clientAddress = clientAddressEditText.getText().toString();
-            String clientPort = clientPortEditText.getText().toString();
-            if (clientAddress == null || clientAddress.isEmpty()
-                    || clientPort == null || clientPort.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "[MAIN ACTIVITY] Client connection parameters should be filled!", Toast.LENGTH_SHORT).show();
-                return;
-            }
+//            if (clientAddress == null || clientAddress.isEmpty()
+//                    || clientPort == null || clientPort.isEmpty()) {
+//                Toast.makeText(getApplicationContext(), "[MAIN ACTIVITY] Client connection parameters should be filled!", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
             if (serverThread == null || !serverThread.isAlive()) {
                 Toast.makeText(getApplicationContext(), "[MAIN ACTIVITY] There is no server to connect to!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            String city = cityEditText.getText().toString();
-            String informationType = informationTypeSpinner.getSelectedItem().toString();
-            if (city == null || city.isEmpty()
-                    || informationType == null || informationType.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "[MAIN ACTIVITY] Parameters from client (city / information type) should be filled", Toast.LENGTH_SHORT).show();
+            String city = stockEditText.getText().toString();
+//            String informationType = informationTypeSpinner.getSelectedItem().toString();
+            if (city == null || city.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "[MAIN ACTIVITY] Parameters from client stock should be filled", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            weatherForecastTextView.setText(Constants.EMPTY_STRING);
+            //infoTextView.setText(Constants.EMPTY_STRING);
+
 
             clientThread = new ClientThread(
-                    clientAddress, Integer.parseInt(clientPort), city, informationType, weatherForecastTextView
+                    "localhost", Integer.parseInt(serverPortEditText.getText().toString()), city,
+                    "", infoTextView
             );
             clientThread.start();
         }
@@ -96,13 +92,10 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
         connectButton = (Button)findViewById(R.id.connect_button);
         connectButton.setOnClickListener(connectButtonClickListener);
 
-        clientAddressEditText = (EditText)findViewById(R.id.client_address_edit_text);
-        clientPortEditText = (EditText)findViewById(R.id.client_port_edit_text);
-        cityEditText = (EditText)findViewById(R.id.city_edit_text);
-        informationTypeSpinner = (Spinner)findViewById(R.id.information_type_spinner);
-        getWeatherForecastButton = (Button)findViewById(R.id.get_weather_forecast_button);
-        getWeatherForecastButton.setOnClickListener(getWeatherForecastButtonClickListener);
-        weatherForecastTextView = (TextView)findViewById(R.id.weather_forecast_text_view);
+        stockEditText = (EditText)findViewById(R.id.stock_edit_text);
+        getButton = (Button)findViewById(R.id.get);
+        getButton.setOnClickListener(getWeatherForecastButtonClickListener);
+        infoTextView = (TextView)findViewById(R.id.stock_text_view);
     }
 
     @Override

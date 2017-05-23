@@ -48,12 +48,19 @@ public class ClientThread extends Thread {
             printWriter.println(informationType);
             printWriter.flush();
             String weatherInformation;
+            weatherForecastTextView.post(new Runnable() {
+                @Override
+                public void run() {
+                    weatherForecastTextView.setText("");
+                }
+            });
             while ((weatherInformation = bufferedReader.readLine()) != null) {
                 final String finalizedWeateherInformation = weatherInformation;
+                Log.d("Client", finalizedWeateherInformation);
                 weatherForecastTextView.post(new Runnable() {
                    @Override
                     public void run() {
-                       weatherForecastTextView.setText(finalizedWeateherInformation);
+                       weatherForecastTextView.append(finalizedWeateherInformation + "\n");
                    }
                 });
             }

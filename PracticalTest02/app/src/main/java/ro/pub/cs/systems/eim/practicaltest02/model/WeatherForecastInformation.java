@@ -2,77 +2,52 @@ package ro.pub.cs.systems.eim.practicaltest02.model;
 
 public class WeatherForecastInformation {
 
-    private String temperature;
-    private String windSpeed;
-    private String condition;
-    private String pressure;
-    private String humidity;
+    private String time;
+    private String value;
+    private long crt_time;
 
     public WeatherForecastInformation() {
-        this.temperature = null;
-        this.windSpeed = null;
-        this.condition = null;
-        this.pressure = null;
-        this.humidity = null;
+        this.time = null;
+        this.value = null;
+        this.crt_time = System.currentTimeMillis();
     }
 
-    public WeatherForecastInformation(String temperature, String windSpeed, String condition, String pressure, String humidity) {
-        this.temperature = temperature;
-        this.windSpeed = windSpeed;
-        this.condition = condition;
-        this.pressure = pressure;
-        this.humidity = humidity;
+    public WeatherForecastInformation(String time, String value) {
+        this.time = time;
+        this.value = value;
+        this.crt_time = System.currentTimeMillis();
     }
 
-    public String getTemperature() {
-        return temperature;
+    public String getTime() {
+        return time;
     }
 
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public String getWindSpeed() {
-        return windSpeed;
+    public String getValue() {
+        return value;
     }
 
-    public void setWindSpeed(String windSpeed) {
-        this.windSpeed = windSpeed;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public String getCondition() {
-        return condition;
+    public long getCrtTime() {
+        return crt_time;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
-
-    public String getPressure() {
-        return pressure;
-    }
-
-    public void setPressure(String pressure) {
-        this.pressure = pressure;
-    }
-
-    public String getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(String humidity) {
-        this.humidity = humidity;
+    public void setCrtTime(long crt_time) {
+        this.crt_time = crt_time;
     }
 
     @Override
     public String toString() {
-        return "WeatherForecastInformation{" +
-                "temperature='" + temperature + '\'' +
-                ", windSpeed='" + windSpeed + '\'' +
-                ", condition='" + condition + '\'' +
-                ", pressure='" + pressure + '\'' +
-                ", humidity='" + humidity + '\'' +
-                '}';
+        return "" +
+                "Time:'" + time + '\n' +
+                "Value:'" + value + '\n'
+               ;
     }
 
 }
